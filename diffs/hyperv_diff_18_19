@@ -1,0 +1,1227 @@
+diff -urp hyperv18/include/hv_hal_api.h hyperv19/include/hv_hal_api.h
+--- hyperv18/include/hv_hal_api.h	2011-10-28 02:34:00.000000000 -0700
++++ hyperv19/include/hv_hal_api.h	2011-11-10 01:48:38.000000000 -0800
+@@ -20,6 +20,8 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV HAL API header
+  *
+  *****************************************************************************/
+@@ -27,12 +29,6 @@
+ /*
+  * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+  *
+-  * This software is available to you under a choice of one of two
+- * licenses.  You may choose to be licensed under the terms of the GNU
+- * General Public License (GPL) Version 2, available from the file
+- * LICENSE-GPL in the main directory of this source tree, or the
+- * BSD license (http://opensource.org/licenses/bsd-license.php).
+- *
+  *     Redistribution and use in source and binary forms, with or
+  *     without modification, are permitted provided that the following
+  *     conditions are met:
+@@ -60,6 +56,9 @@
+  *   Hank Janssen  <hjanssen@microsoft.com>
+  */
+ 
++#ifndef __HV_HAL_API_H__
++#define __HV_HAL_API_H__
++
+ #pragma once
+ 
+ 
+@@ -69,3 +68,5 @@
+ typedef UINT64 HV_NANO100_TIME,     *PHV_NANO100_TIME;
+ typedef UINT64 HV_NANO100_DURATION, *PHV_NANO100_DURATION;
+ 
++#endif  /* __HV_HAL_API_H__ */
++
+diff -urp hyperv18/include/hv_hc_api.h hyperv19/include/hv_hc_api.h
+--- hyperv18/include/hv_hc_api.h	2011-10-28 02:34:49.000000000 -0700
++++ hyperv19/include/hv_hc_api.h	2011-11-10 01:53:58.000000000 -0800
+@@ -20,10 +20,45 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV HC API header
+  *
+  *****************************************************************************/
+ 
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
++
++#ifndef __HV_HC_API_H__
++#define __HV_HC_API_H__
++
+ #pragma once
+ 
+ //
+@@ -61,3 +96,5 @@ typedef struct _HV_INPUT_SIGNAL_EVENT
+     UINT16           RsvdZ;
+ } HV_INPUT_SIGNAL_EVENT, *PHV_INPUT_SIGNAL_EVENT;
+ 
++#endif  /* __HV_HC_API_H__ */
++
+diff -urp hyperv18/include/hv_list.h hyperv19/include/hv_list.h
+--- hyperv18/include/hv_list.h	2011-10-28 02:37:32.000000000 -0700
++++ hyperv19/include/hv_list.h	2011-11-10 02:36:22.000000000 -0800
+@@ -20,24 +20,41 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV singly and doubly linked list implementation using macros.
+  *
+  *****************************************************************************/
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
+ 
+-/*++
+-
+-File:		List.h
+-
+-Abstract:	This file contains header file for the both Singly and
+-		Doubly Linked List implementation using macros.
+-
+-
+-Copyright:	Most of the Double Linked List macros are based on the 
+-		Microsoft's NT DDK list handling macros. Pulled out of 
+-		NT DDK so this files doesn't need an installed ddk kit to
+-		compile
+-
+---*/
+ #ifndef __HV_LIST_H__
+ #define __HV_LIST_H__
+ 
+@@ -287,4 +304,3 @@ typedef DLIST_ENTRY *PLIST_ENTRY;
+ #endif  /* __HV_LIST_H__ */
+ 
+ /* EOF */
+-
+diff -urp hyperv18/include/hv_pt_api.h hyperv19/include/hv_pt_api.h
+--- hyperv18/include/hv_pt_api.h	2011-10-28 02:47:52.000000000 -0700
++++ hyperv19/include/hv_pt_api.h	2011-11-10 01:56:57.000000000 -0800
+@@ -20,11 +20,46 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV versioning definitions used for guests reporting themselves to the
+  * hypervisor, and vice versa.
+  *
+  *****************************************************************************/
+ 
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
++
++#ifndef __HV_PT_API_H__
++#define __HV_PT_API_H__
++
+ #pragma once
+ 
+ //
+@@ -88,3 +123,5 @@ typedef union _HV_X64_MSR_HYPERCALL_CONT
+     };
+ } HV_X64_MSR_HYPERCALL_CONTENTS, *PHV_X64_MSR_HYPERCALL_CONTENTS;
+ 
++#endif  /* __HV_PT_API_H__ */
++
+diff -urp hyperv18/include/hv_status.h hyperv19/include/hv_status.h
+--- hyperv18/include/hv_status.h	2011-10-28 02:49:04.000000000 -0700
++++ hyperv19/include/hv_status.h	2011-11-10 02:06:54.000000000 -0800
+@@ -20,31 +20,55 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV hypervisor return codes
+  *
+  *****************************************************************************/
+ 
+-/*++
+-
+-Copyright (c) Microsoft Corporation. All rights reserved.
+-
+-Module Name:
+-
+-    HvStatus.h
+-
+-Abstract:
+-
+-    This file contains hypervisor return codes.
+-
+-Note:
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
+ 
+-    Changes to public status values (< 0x1000) in this file must be reflected
+-    in the NTSTATUS namespace by modifing base\published\ntstatus.mc
++#ifndef __HV_STATUS_H__
++#define __HV_STATUS_H__
+ 
+-    ISSUE-11/1/06-andrewth -- Add instructions for updating WINERROR values as
+-    well.
++/*
++ * Note from old code distribution (not in lis21 code drop):
++ *
++ *  Changes to public status values (< 0x1000) in this file must be reflected
++ *  in the NTSTATUS namespace by modifing base\published\ntstatus.mc
++ *
++ *  ISSUE-11/1/06-andrewth -- Add instructions for updating WINERROR values as
++ *  well.
++ */
+ 
+---*/
+ // begin_hvgdk
+ //
+ // Status codes for hypervisor operations.
+@@ -739,3 +763,5 @@ typedef UINT16 HV_STATUS, *PHV_STATUS;
+ //
+ #define HV_STATUS_CONTROLLER_IN_USE      ((HV_STATUS)0x2005)
+ 
++#endif  /* __HV_STATUS_H__ */
++
+diff -urp hyperv18/include/hv_synic_api.h hyperv19/include/hv_synic_api.h
+--- hyperv18/include/hv_synic_api.h	2011-10-28 02:50:10.000000000 -0700
++++ hyperv19/include/hv_synic_api.h	2011-11-10 02:13:45.000000000 -0800
+@@ -20,10 +20,45 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV Synic API header
+  *
+  *****************************************************************************/
+ 
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
++
++#ifndef __HV_SYNIC_API_H__
++#define __HV_SYNIC_API_H__
++
+ #pragma once
+ 
+ //
+@@ -492,3 +527,5 @@ typedef struct _HV_MONITOR_PAGE
+ 
+ typedef volatile HV_MONITOR_PAGE* PVHV_MONITOR_PAGE;
+ 
++#endif  /* __HV_SYNIC_API_H__ */
++
+diff -urp hyperv18/include/hv_types.h hyperv19/include/hv_types.h
+--- hyperv18/include/hv_types.h	2011-10-28 02:50:51.000000000 -0700
++++ hyperv19/include/hv_types.h	2011-11-10 02:17:07.000000000 -0800
+@@ -20,10 +20,45 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV miscellaneous defines
+  *
+  *****************************************************************************/
+ 
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
++
++#ifndef __HV_TYPES_H__
++#define __HV_TYPES_H__
++
+ #pragma once
+ 
+ typedef UINT64 HV_GPA, *PHV_GPA;
+@@ -31,3 +66,5 @@ typedef UINT64 HV_GPA, *PHV_GPA;
+ #define HV_X64_PAGE_SIZE (4096)
+ #define HV_PAGE_SIZE HV_X64_PAGE_SIZE
+ 
++#endif  /* __HV_TYPES_H__ */
++
+Only in hyperv18/include: hv_vmbus_channel_format.h
+diff -urp hyperv18/include/hv_vp_api.h hyperv19/include/hv_vp_api.h
+--- hyperv18/include/hv_vp_api.h	2011-10-28 03:04:10.000000000 -0700
++++ hyperv19/include/hv_vp_api.h	2011-11-10 02:29:38.000000000 -0800
+@@ -20,10 +20,45 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV miscellaneous CPU, CPU ID defines
+  *
+  *****************************************************************************/
+ 
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
++
++#ifndef __HV_VP_API_H__
++#define __HV_VP_API_H__
++
+ #pragma once
+ //
+ // Virtual Processor Indices
+@@ -52,3 +87,5 @@ typedef enum _HV_CPUID_FUNCTION
+ 
+ } HV_CPUID_FUNCTION, *PHV_CPUID_FUNCTION;
+ 
++#endif  /* __HV_VP_API_H__ */
++
+diff -urp hyperv18/netvsc/hv_net_vsc.c hyperv19/netvsc/hv_net_vsc.c
+--- hyperv18/netvsc/hv_net_vsc.c	2011-11-09 02:18:55.000000000 -0800
++++ hyperv19/netvsc/hv_net_vsc.c	2011-11-10 03:05:27.000000000 -0800
+@@ -27,12 +27,6 @@
+ /*
+  * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+  *
+- * This software is available to you under a choice of one of two
+- * licenses.  You may choose to be licensed under the terms of the GNU
+- * General Public License (GPL) Version 2, available from the file
+- * LICENSE-GPL in the main directory of this source tree, or the
+- * BSD license (http://opensource.org/licenses/bsd-license.php).
+- *
+  *     Redistribution and use in source and binary forms, with or
+  *     without modification, are permitted provided that the following
+  *     conditions are met:
+@@ -61,16 +55,6 @@
+  */
+ 
+ 
+-/*++
+-
+-Name:
+-	NetVsc.c
+-
+-Description:
+-	Closed-source vmbus network vsc module
+-
+---*/
+-
+ /* Fixme:  Added these includes to get struct arpcom definition */
+ #include <sys/param.h>
+ //#include <sys/systm.h>
+@@ -155,7 +139,7 @@ NetVscOnCleanup(
+ 	DRIVER_OBJECT *Driver
+ 	);
+ 
+-void
++static void
+ NetVscOnChannelCallback(
+ 	PVOID context
+ 	);
+@@ -203,12 +187,6 @@ NetVscOnReceive(
+ 	VMPACKET_DESCRIPTOR *Packet
+ 	);
+ 
+-// Fixme
+-//void
+-//NetVscOnReceiveCompletion(
+-//	PVOID Context
+-//	);
+-
+ static void
+ NetVscSendReceiveCompletion(
+ 	DEVICE_OBJECT	*Device,
+@@ -223,7 +201,7 @@ static inline NETVSC_DEVICE* AllocNetDev
+ 	if (!netDevice)
+ 		return NULL;
+ 
+-	// Set to 2 to allow both inbound and outbound traffics 
++	// Set to 2 to allow both inbound and outbound traffic
+ 	InterlockedCompareExchange(&netDevice->RefCount, 2, 0);
+ 
+ 	netDevice->Device = Device;
+@@ -398,7 +376,7 @@ NetVscInitializeReceiveBufferWithNetVsp(
+ 	}
+ 	ASSERT(((ULONG_PTR)netDevice->ReceiveBuffer & (PAGE_SIZE-1)) == 0); // page-aligned buffer
+ 
+-	DPRINT_INFO(NETVSC, "Establishing receive buffer's GPADL...");
++	DPRINT_DBG(NETVSC, "Establishing receive buffer's GPADL...");
+ 
+ //	printf("RecvBuffer: Virt: %x, cnt: %x\n", (ULONG_PTR)netDevice->ReceiveBuffer, netDevice->ReceiveBufferSize >> PAGE_SHIFT);
+ 
+@@ -419,7 +397,7 @@ NetVscInitializeReceiveBufferWithNetVsp(
+ 	//WaitEventWait(ext->ChannelInitEvent);
+ 
+ 	// Notify the NetVsp of the gpadl handle
+-	DPRINT_INFO(NETVSC, "Sending NvspMessage1TypeSendReceiveBuffer...");
++	DPRINT_DBG(NETVSC, "Sending NvspMessage1TypeSendReceiveBuffer...");
+ 
+ 	initPacket = &netDevice->ChannelInitPacket;
+ 
+@@ -471,7 +449,7 @@ NetVscInitializeReceiveBufferWithNetVsp(
+ 		initPacket->Messages.Version1Messages.SendReceiveBufferComplete.Sections,
+ 		netDevice->ReceiveSectionCount * sizeof(NVSP_1_RECEIVE_BUFFER_SECTION));
+ 
+-	DPRINT_INFO(NETVSC, 
++	DPRINT_DBG(NETVSC, 
+ 		"Receive sections info (count %d, offset %d, endoffset %d, suballoc size %d, num suballocs %d)",
+ 		netDevice->ReceiveSectionCount, netDevice->ReceiveSections[0].Offset, netDevice->ReceiveSections[0].EndOffset,
+ 		netDevice->ReceiveSections[0].SubAllocationSize, netDevice->ReceiveSections[0].NumSubAllocations);
+@@ -527,7 +505,7 @@ NetVscInitializeSendBufferWithNetVsp(
+ 	}
+ 	ASSERT(((ULONG_PTR)netDevice->SendBuffer & (PAGE_SIZE-1)) == 0); // page-aligned buffer
+ 
+-	DPRINT_INFO(NETVSC, "Establishing send buffer's GPADL...");
++	DPRINT_DBG(NETVSC, "Establishing send buffer's GPADL...");
+ //	printf("SendBuffer: Virt: %x, cnt: %x\n", (ULONG_PTR)netDevice->SendBuffer, netDevice->SendBufferSize >> PAGE_SHIFT);
+ 
+ 	// Establish the gpadl handle for this buffer on this channel.
+@@ -547,7 +525,7 @@ NetVscInitializeSendBufferWithNetVsp(
+ 	//WaitEventWait(ext->ChannelInitEvent);
+ 
+ 	// Notify the NetVsp of the gpadl handle
+-	DPRINT_INFO(NETVSC, "Sending NvspMessage1TypeSendSendBuffer...");
++	DPRINT_DBG(NETVSC, "Sending NvspMessage1TypeSendSendBuffer...");
+ 
+ 	initPacket = &netDevice->ChannelInitPacket;
+ 
+@@ -610,7 +588,7 @@ NetVscDestroyReceiveBuffer(
+ 	// (ie sent NvspMessage1TypeSendReceiveBuffer msg) therefore, we need to send a revoke msg here
+ 	if (NetDevice->ReceiveSectionCount)
+ 	{
+-		DPRINT_INFO(NETVSC, "Sending NvspMessage1TypeRevokeReceiveBuffer...");
++		DPRINT_DBG(NETVSC, "Sending NvspMessage1TypeRevokeReceiveBuffer...");
+ 
+ 		// Send the revoke receive buffer
+ 		revokePacket = &NetDevice->RevokePacket;
+@@ -688,7 +666,7 @@ NetVscDestroySendBuffer(
+ 	// (ie sent NvspMessage1TypeSendReceiveBuffer msg) therefore, we need to send a revoke msg here
+ 	if (NetDevice->SendSectionSize)
+ 	{
+-		DPRINT_INFO(NETVSC, "Sending NvspMessage1TypeRevokeSendBuffer...");
++		DPRINT_DBG(NETVSC, "Sending NvspMessage1TypeRevokeSendBuffer...");
+ 
+ 		// Send the revoke send buffer
+ 		revokePacket = &NetDevice->RevokePacket;
+@@ -715,7 +693,7 @@ NetVscDestroySendBuffer(
+ 	// Teardown the gpadl on the vsp end
+ 	if (NetDevice->SendBufferGpadlHandle)
+ 	{
+-		DPRINT_INFO(NETVSC, "Tearing down send buffer's GPADL...");
++		DPRINT_DBG(NETVSC, "Tearing down send buffer's GPADL...");
+ 
+ 		ret = NetDevice->Device->Driver->VmbusChannelInterface.TeardownGpadl(NetDevice->Device,
+ 																				NetDevice->SendBufferGpadlHandle);
+@@ -732,7 +710,7 @@ NetVscDestroySendBuffer(
+ 
+ 	if (NetDevice->SendBuffer)
+ 	{
+-		DPRINT_INFO(NETVSC, "Freeing up send buffer...");
++		DPRINT_DBG(NETVSC, "Freeing up send buffer...");
+ 
+ 		// Free up the receive buffer
+ 		PageFree(NetDevice->SendBuffer, NetDevice->SendBufferSize >> PAGE_SHIFT);
+@@ -771,7 +749,7 @@ NetVscConnectToVsp(
+     initPacket->Messages.InitMessages.Init.MinProtocolVersion = NVSP_MIN_PROTOCOL_VERSION;
+     initPacket->Messages.InitMessages.Init.MaxProtocolVersion = NVSP_MAX_PROTOCOL_VERSION;
+ 
+-	DPRINT_INFO(NETVSC, "Sending NvspMessageTypeInit...");
++	DPRINT_DBG(NETVSC, "Sending NvspMessageTypeInit...");
+ 
+ 	// Send the init request
+ 	ret = Device->Driver->VmbusChannelInterface.SendPacket(Device,
+@@ -791,7 +769,7 @@ NetVscConnectToVsp(
+ 
+ 	// Now, check the response
+ 	//ASSERT(initPacket->Messages.InitMessages.InitComplete.MaximumMdlChainLength <= MAX_MULTIPAGE_BUFFER_COUNT);
+-	DPRINT_INFO(NETVSC, "NvspMessageTypeInit status(%d) max mdl chain (%d)", 
++	DPRINT_DBG(NETVSC, "NvspMessageTypeInit status(%d) max mdl chain (%d)", 
+ 		initPacket->Messages.InitMessages.InitComplete.Status,
+ 		initPacket->Messages.InitMessages.InitComplete.MaximumMdlChainLength);
+ 
+@@ -809,7 +787,7 @@ NetVscConnectToVsp(
+ 		ret = -1;
+ 		goto Cleanup;
+ 	}
+-	DPRINT_INFO(NETVSC, "Sending NvspMessage1TypeSendNdisVersion...");
++	DPRINT_DBG(NETVSC, "Sending NvspMessage1TypeSendNdisVersion...");
+ 
+ 	// Send the ndis version
+ 	memset(initPacket, 0, sizeof(NVSP_MESSAGE));
+@@ -1004,7 +982,8 @@ NetVscOnDeviceRemove(
+ 
+ 	DPRINT_ENTER(NETVSC);
+ 	
+-	DPRINT_INFO(NETVSC, "Disabling outbound traffic on net device (%p)...", Device->Extension);
++	DPRINT_INFO(NETVSC, "Disabling outbound traffic on net device (%p)...",
++		    Device->Extension);
+ 	
+ 	// Stop outbound traffic ie sends and receives completions
+ 	netDevice = ReleaseOutboundNetDevice(Device);
+@@ -1022,7 +1001,7 @@ NetVscOnDeviceRemove(
+ 		Sleep(100);
+ 	}
+ 
+-	DPRINT_INFO(NETVSC, "Disconnecting from netvsp...");
++	DPRINT_DBG(NETVSC, "Disconnecting from netvsp...");
+ 
+ 	NetVscDisconnectFromVsp(netDevice);
+ 
+@@ -1112,8 +1091,8 @@ NetVscOnSendCompletion(
+ 		// Get the send context
+ 		nvscPacket = (NETVSC_PACKET *)(ULONG_PTR)Packet->TransactionId;
+ 		ASSERT(nvscPacket);
+-		// Notify the layer above us
+ 
++		// Notify the layer above us
+ 		nvscPacket->Completion.Send.OnSendCompletion(nvscPacket->Completion.Send.SendCompletionContext);
+ 
+ 		InterlockedDecrement(&netDevice->NumOutstandingSends);
+@@ -1122,7 +1101,6 @@ NetVscOnSendCompletion(
+ 	{
+ 		DPRINT_ERR(NETVSC, "Unknown send completion packet type - %d received!!", nvspPacket->Header.MessageType);
+ 	}
+-	
+ 
+ 	PutNetDevice(Device);
+ 	DPRINT_EXIT(NETVSC);
+@@ -1290,7 +1268,7 @@ NetVscOnReceive(
+ 	// i.e. we can handled some of the xfer page packet ranges...
+ 	if (count < 2)
+ 	{
+-// 		DPRINT_ERR(NETVSC, "Got only %d netvsc pkt...needed %d pkts. Dropping this xfer page packet completely!", count, vmxferpagePacket->RangeCount+1);
++//		DPRINT_ERR(NETVSC, "Got only %d netvsc pkt...needed %d pkts. Dropping this xfer page packet completely!", count, vmxferpagePacket->RangeCount+1);
+ 
+ 		// Return it to the freelist
+ 		SpinlockAcquire(netDevice->ReceivePacketListLock);
+@@ -1317,7 +1295,7 @@ NetVscOnReceive(
+ 
+ 	if (xferpagePacket->Count != vmxferpagePacket->RangeCount)
+ 	{
+-//		DPRINT_INFO(NETVSC, "Needed %d netvsc pkts to satisy this xfer page...got %d", vmxferpagePacket->RangeCount, xferpagePacket->Count);
++//		DPRINT_DBG(NETVSC, "Needed %d netvsc pkts to satisy this xfer page...got %d", vmxferpagePacket->RangeCount, xferpagePacket->Count);
+ 	}
+ 
+ 	// Each range represents 1 RNDIS pkt that contains 1 ethernet frame
+@@ -1352,7 +1330,9 @@ NetVscOnReceive(
+ 
+ 		netvscPacket->PageBuffers[0].Pfn = start >> PAGE_SHIFT;
+ 
+-		end = (void*)((ULONG_PTR)netDevice->ReceiveBuffer + vmxferpagePacket->Ranges[i].ByteOffset + vmxferpagePacket->Ranges[i].ByteCount -1);
++		end = (void*)((ULONG_PTR)netDevice->ReceiveBuffer
++		    + vmxferpagePacket->Ranges[i].ByteOffset 
++		    + vmxferpagePacket->Ranges[i].ByteCount -1);
+ 		end = ((unsigned long)end) & ~(PAGE_SIZE - 1);
+ 
+ 		// FIXME: For now, assume we are within a page
+@@ -1531,7 +1511,6 @@ NetVscOnChannelCallback(
+ 		return;
+ 	}
+ 
+-
+ 	do
+ 	{
+ 		ret = device->Driver->VmbusChannelInterface.RecvPacketRaw(device,
+diff -urp hyperv18/vmbus/hv_channel_interface.c hyperv19/vmbus/hv_channel_interface.c
+--- hyperv18/vmbus/hv_channel_interface.c	2011-11-09 02:18:44.000000000 -0800
++++ hyperv19/vmbus/hv_channel_interface.c	2011-11-09 23:48:59.000000000 -0800
+@@ -20,25 +20,41 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * Public wrapper around the internal channel APIs
+  *
+  *****************************************************************************/
+ 
+-/*++
+-
+-Copyright 2008 Microsoft Corporation. All Rights Reserved.
+-
+---*/
+-
+-/*++
+-
+-File:
+-	ChannelInterface.c
+-
+-Description:
+-	Public wrapper around the internal channel APIs
+-
+---*/
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
+ 
+ #ifdef REMOVED
+ /* Fixme -- removed */
+diff -urp hyperv18/vmbus/hv_channel_mgmt.c hyperv19/vmbus/hv_channel_mgmt.c
+--- hyperv18/vmbus/hv_channel_mgmt.c	2011-11-09 02:18:44.000000000 -0800
++++ hyperv19/vmbus/hv_channel_mgmt.c	2011-11-09 23:55:07.000000000 -0800
+@@ -20,6 +20,8 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV channel code
+  *
+  *****************************************************************************/
+@@ -27,12 +29,6 @@
+ /*
+  * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+  *
+- * This software is available to you under a choice of one of two
+- * licenses.  You may choose to be licensed under the terms of the GNU
+- * General Public License (GPL) Version 2, available from the file
+- * LICENSE-GPL in the main directory of this source tree, or the
+- * BSD license (http://opensource.org/licenses/bsd-license.php).
+- *
+  *     Redistribution and use in source and binary forms, with or
+  *     without modification, are permitted provided that the following
+  *     conditions are met:
+@@ -462,6 +458,9 @@ void shutdown_onchannelcallback(void *co
+ 
+ 	if (execute_shutdown == true)
+ 	{
++		/*
++		 * Fixme:  This replaces several lines of Linux shutdown code
++		 */
+ 		shutdown_nice(RB_POWEROFF | RB_HALT);
+ 	}
+ }
+diff -urp hyperv18/vmbus/hv_connection.c hyperv19/vmbus/hv_connection.c
+--- hyperv18/vmbus/hv_connection.c	2011-11-09 02:18:44.000000000 -0800
++++ hyperv19/vmbus/hv_connection.c	2011-11-10 00:15:26.000000000 -0800
+@@ -20,25 +20,41 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
+- * Implements vmbus connection functionality
++ * Ported from lis21 code drop
++ *
++ * HyperV vmbus connection functionality
+  *
+  *****************************************************************************/
+ 
+-/*++
+-
+-Copyright 2008 Microsoft Corporation. All Rights Reserved.
+-
+---*/
+-
+-/*++
+-
+-File:
+-	Connection.c
+-
+-Description:
+-	Implements vmbus connection functionality
+-
+---*/
++/*
++ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
++ *
++ *     Redistribution and use in source and binary forms, with or
++ *     without modification, are permitted provided that the following
++ *     conditions are met:
++ *
++ *      - Redistributions of source code must retain the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer.
++ *
++ *      - Redistributions in binary form must reproduce the above
++ *        copyright notice, this list of conditions and the following
++ *        disclaimer in the documentation and/or other materials
++ *        provided with the distribution.
++ *
++ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
++ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
++ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
++ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
++ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++ * SOFTWARE.
++ *
++ * Authors:
++ *   Haiyang Zhang <haiyangz@microsoft.com>
++ *   Hank Janssen  <hjanssen@microsoft.com>
++ */
+ 
+ #ifdef REMOVED
+ /* Fixme:  Removed */
+@@ -112,7 +128,7 @@ VmbusConnect(void)
+ 	INITIALIZE_LIST_HEAD(&gVmbusConnection.ChannelList);
+ 	gVmbusConnection.ChannelLock = SpinlockCreate();
+ 
+-	// Setup the vmbus event connection for channel interrupt abstractioni
++	// Set up the vmbus event connection for channel interrupt abstraction
+ 	// stuff
+ 	gVmbusConnection.InterruptPage = PageAlloc(1);
+ 	if (gVmbusConnection.InterruptPage == NULL)
+@@ -160,8 +176,8 @@ VmbusConnect(void)
+ 	SpinlockRelease(gVmbusConnection.ChannelMsgLock);
+ 
+ 	DPRINT_DBG(VMBUS, "Vmbus connection:  interrupt pfn %llx, monitor1 pfn "
+-	    "%llx,, monitor2 pfn %llx", 
+-	    msg->InterruptPage, msg->MonitorPage1, msg->MonitorPage2);
++		"%llx,, monitor2 pfn %llx", 
++		msg->InterruptPage, msg->MonitorPage1, msg->MonitorPage2);
+ 
+ 	DPRINT_DBG(VMBUS, "Sending channel initiate msg...");
+ 
+@@ -173,9 +189,11 @@ VmbusConnect(void)
+ 	}
+ 	
+ 	// Wait for the connection response
++	/* Fixme:  Error message added */
+ 	DPRINT_DBG(VMBUS, "Wait for the Connection response ...");
+ 	WaitEventWait(msgInfo->WaitEvent);
+-	DPRINT_DBG(VMBUS, "Got tthe Connection response ...");
++	/* Fixme:  Error message added */
++	DPRINT_DBG(VMBUS, "Got the Connection response ...");
+ 
+ 	REMOVE_ENTRY_LIST(&msgInfo->MsgListEntry);
+ 
+@@ -187,8 +205,8 @@ VmbusConnect(void)
+ 	}
+ 	else
+ 	{
+-		DPRINT_ERR(VMBUS, "Vmbus connection failed!!...current version "
+-		    "(%d) not supported", VMBUS_REVISION_NUMBER); 
++		DPRINT_ERR(VMBUS, "Vmbus connection failed!!...current version"
++		    " (%d) not supported", VMBUS_REVISION_NUMBER); 
+ 		ret = -1;
+ 
+ 		goto Cleanup;
+@@ -347,10 +365,11 @@ VmbusProcessChannelEvent(
+ 	UINT32 relId = (UINT32)(ULONG_PTR)context;
+ 
+ 	ASSERT(relId > 0);
+-	/* NetScaler */
++	/* Fixme:  Added for NetScaler */
+ 	/* If the channel is in poll mode, return */
+-	if (VmbusGetChannelMode(relId))
++	if (VmbusGetChannelMode(relId)) {
+ 		return;
++	}
+ 
+ 	// Find the channel based on this relid and invokes
+ 	// the channel callback to process the event
+@@ -387,7 +406,9 @@ VmbusOnEvents(
+ 	int maxdword = MAX_NUM_CHANNELS_SUPPORTED >> 5;
+ 	int bit;
+ 	int relid;
++	/* Fixme:  not in lis21 code */
+ 	int mycnt = 0;
++	/* Fixme:  not in lis21 code */
+ 	int xcnt = 0;
+ 	UINT32* recvInterruptPage = gVmbusConnection.RecvInterruptPage;
+ 	//VMBUS_CHANNEL_MESSAGE* receiveMsg;
+@@ -409,7 +430,7 @@ VmbusOnEvents(
+ 						relid = (dword << 5) + bit;
+ 						mycnt++;
+ 
+-						/* NetScaler - Comment out */
++						/* Fixme:  Commented out */
+ //						DPRINT_DBG(VMBUS, "event detected for relid - %d", relid);
+ 
+ 						if (relid == 0) // special case - vmbus channel protocol msg
+@@ -428,6 +449,7 @@ VmbusOnEvents(
+ 			}
+ 		 }
+ 	}
++	/* Fixme:  not in lis21 code */
+ 	if (mycnt == 0) {
+ //		printf("No event to process - BUG: %x\n", xcnt);
+ 	}
+@@ -491,7 +513,10 @@ VmbusSetEvent(UINT32 childRelId)
+ 	return ret;
+ }
+           
+-/* NetScaler */
++/*
++ * Fixme:  NetScaler.  The functions below were added for NetScaler,
++ * determine if they are needed for the FreeBSD porting effort.
++ */
+ 
+ /*++
+ 
+@@ -504,7 +529,6 @@ Description:
+ 	mode 0: Interrupt
+ --*/
+ 
+-// Fixme:  Made static
+ static int VmbusChannelMode[MAX_NUM_CHANNELS_SUPPORTED >> 5];
+ 
+ void
+diff -urp hyperv18/vmbus/hv_hv.c hyperv19/vmbus/hv_hv.c
+--- hyperv18/vmbus/hv_hv.c	2011-11-09 02:18:44.000000000 -0800
++++ hyperv19/vmbus/hv_hv.c	2011-11-10 01:31:41.000000000 -0800
+@@ -20,6 +20,8 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * Implements low-level interactions with windows hypervisor
+  *
+  *****************************************************************************/
+@@ -27,12 +29,6 @@
+ /*
+  * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+  *
+- * This software is available to you under a choice of one of two
+- * licenses.  You may choose to be licensed under the terms of the GNU
+- * General Public License (GPL) Version 2, available from the file
+- * LICENSE-GPL in the main directory of this source tree, or the
+- * BSD license (http://opensource.org/licenses/bsd-license.php).
+- *
+  *     Redistribution and use in source and binary forms, with or
+  *     without modification, are permitted provided that the following
+  *     conditions are met:
+@@ -120,18 +116,6 @@ Description:
+ #include <dev/hyperv/include/hv_config.h>
+ 
+ #include <sys/time.h>
+-
+-#ifdef REMOVED
+-/*
+- * Fixme:  Added system include files
+- * Fixme:  Now getting this define from /usr/include/machine/param.h
+- */
+-//
+-// Fixme -- is 64 in usr.src/sys/amd64/include/param.h
+-//
+-#define MAXCPU          64
+-#endif
+-
+ #include <sys/pcpu.h>
+ 
+ //
+@@ -156,7 +140,6 @@ Description:
+ 	Query the cpuid for presense of windows hypervisor
+ 
+ --*/
+-/* NetScaler:  Make the function extern - for vmbus probing */
+ int
+ HvQueryHypervisorPresence (
+     void
+@@ -320,7 +303,7 @@ HvDoHypercall (
+     DPRINT_DBG(VMBUS, "Hypercall <return %llx>",  hvStatusLo | ((UINT64)hvStatusHi << 32));
+ 
+     return (hvStatusLo | ((UINT64)hvStatusHi << 32));
+-#endif // x86_64
++#endif // __x86_64__
+ }
+ 
+ /*++
+@@ -334,7 +317,7 @@ Description:
+ 
+ --*/
+ 
+-extern int
++int
+ HvInit (
+     void
+     )
+@@ -393,7 +376,7 @@ HvInit (
+ 		hypercallMsr.GuestPhysicalAddress = Virtual2Physical(virtAddr) >> PAGE_SHIFT;
+ 		WriteMsr(HV_X64_MSR_HYPERCALL, hypercallMsr.AsUINT64);
+ 
+-		// Confirm that hypercall page did get setup.
++		// Confirm that hypercall page did get set up.
+ 		hypercallMsr.AsUINT64 = 0;
+ 		hypercallMsr.AsUINT64 = ReadMsr(HV_X64_MSR_HYPERCALL);
+ 
+@@ -411,6 +394,10 @@ HvInit (
+ 		goto Cleanup;
+ 	}
+ 
++	DPRINT_INFO(VMBUS, "Hypercall page VA=0x%08x, PA=0x%08x",
++               (unsigned long)gHvContext.HypercallPage,
++               (unsigned long)hypercallMsr.GuestPhysicalAddress << PAGE_SHIFT);
++
+ 	// Setup the global signal event param for the signal event hypercall
+ 	gHvContext.SignalEventBuffer = MemAlloc(sizeof(HV_INPUT_SIGNAL_EVENT_BUFFER));
+ 	if (!gHvContext.SignalEventBuffer)
+@@ -418,12 +405,8 @@ HvInit (
+ 		goto Cleanup;
+ 	}
+ 
+-
+ 	gHvContext.SignalEventParam = (PHV_INPUT_SIGNAL_EVENT)(ALIGN_UP((ULONG_PTR)gHvContext.SignalEventBuffer, HV_HYPERCALL_PARAM_ALIGN));
+-
+-
+ 	gHvContext.SignalEventParam->ConnectionId.AsUINT32 = 0;
+-
+ 	gHvContext.SignalEventParam->ConnectionId.u.Id = VMBUS_EVENT_CONNECTION_ID;
+ 	gHvContext.SignalEventParam->FlagNumber = 0;
+ 	gHvContext.SignalEventParam->RsvdZ = 0;
+@@ -486,7 +469,7 @@ HvCleanup (
+ 			VirtualFree(gHvContext.HypercallPage);
+ 			gHvContext.HypercallPage = NULL;
+ 		}
+-}
++	}
+ 
+ 	DPRINT_EXIT(VMBUS);
+ 
+@@ -583,6 +566,7 @@ Description:
+ 	Otherwise, we create and initialize the message and event pages.
+ 
+ --*/
++/* Fixme:  Added for NetScaler, then FreeBSD port */
+ #ifdef DPRINT_DBG
+ #undef DPRINT_DBG
+ #define DPRINT_DBG(...)
+@@ -614,8 +598,8 @@ HvSynicInit (
+ /* Fixme:  Removed to mitigate warning */
+ 	UINT64		guestID;
+ #endif
+-	int cpu = PCPU_GET(cpuid);
+ 	UINT32 irqVector = *((UINT32 *)(irqArg));
++	int cpu = PCPU_GET(cpuid);
+ 
+ 	DPRINT_ENTER(VMBUS);
+ 
+@@ -631,7 +615,30 @@ HvSynicInit (
+ //	DPRINT_INFO(VMBUS, "SynIC version: %llx", version);
+ 
+ 	{
+-//		DPRINT_INFO(VMBUS, "setup SIMP and SIEFP.");
++//		DPRINT_INFO(VMBUS, "set up SIMP and SIEFP.");
++
++		/*
++		 * Fixme:  lis21 code allocates the following here.  In
++		 * our code, the caller of this function allocates these
++		 * before the call.
++		 */
++
++#ifdef REMOVED
++		gHvContext.synICMessagePage[cpu] = PageAllocAtomic();
++		if (gHvContext.synICMessagePage[cpu] == NULL)
++		{
++			DPRINT_ERR(VMBUS, "unable to allocate SYNIC message page!!");
++			goto Cleanup;
++		}
++
++		gHvContext.synICEventPage[cpu] = PageAllocAtomic();
++		if (gHvContext.synICEventPage[cpu] == NULL)
++		{
++			DPRINT_ERR(VMBUS, "unable to allocate SYNIC event page!!");
++			goto Cleanup;
++		}
++#endif
++
+ 		//
+ 		// Setup the Synic's message page
+ 		//
+@@ -661,13 +668,13 @@ HvSynicInit (
+ 		WriteMsr(HV_X64_MSR_SIEFP, siefp.AsUINT64);
+ 	}
+ 	//
+-	// Setup the interception SINT.
++	// Set up the interception SINT.
+ 	//
+ 	//WriteMsr((HV_X64_MSR_SINT0 + HV_SYNIC_INTERCEPTION_SINT_INDEX),
+ 	//             interceptionSint.AsUINT64);
+ 
+ 	//
+-	// Setup the shared SINT.
++	// Set up the shared SINT.
+ 	// 
+ //	DPRINT_INFO(VMBUS, "setup shared SINT.");
+ 	sharedSint.AsUINT64 = ReadMsr(HV_X64_MSR_SINT0 + VMBUS_MESSAGE_SINT);
+@@ -717,7 +724,7 @@ Description:
+ --*/
+ VOID
+ HvSynicCleanup(
+-	VOID 
++	VOID *arg
+ 	)
+ {
+ 	HV_SYNIC_SINT	sharedSint;
+diff -urp hyperv18/vmbus/hv_hv.h hyperv19/vmbus/hv_hv.h
+--- hyperv18/vmbus/hv_hv.h	2011-11-08 00:39:44.000000000 -0800
++++ hyperv19/vmbus/hv_hv.h	2011-11-10 01:47:14.000000000 -0800
+@@ -20,6 +20,8 @@
+  *
+  * Copyright (c) 2010-2011, Citrix, Inc.
+  *
++ * Ported from lis21 code drop
++ *
+  * HyperV low-level hypervisor interface definition file 
+  *
+  *****************************************************************************/
+@@ -27,12 +29,6 @@
+ /*
+  * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+  *
+- * This software is available to you under a choice of one of two
+- * licenses.  You may choose to be licensed under the terms of the GNU
+- * General Public License (GPL) Version 2, available from the file
+- * LICENSE-GPL in the main directory of this source tree, or the
+- * BSD license (http://opensource.org/licenses/bsd-license.php).
+- *
+  *     Redistribution and use in source and binary forms, with or
+  *     without modification, are permitted provided that the following
+  *     conditions are met:
+@@ -60,15 +56,6 @@
+  *   Hank Janssen  <hjanssen@microsoft.com>
+  */
+ 
+-/*++
+-
+-File:
+-	Hv.h
+-
+-Description:
+-	Low-level hypervisor interface definition file 
+-
+---*/
+ #ifndef __HV_HV_H__
+ #define __HV_HV_H__
+ 
+@@ -167,7 +154,7 @@ enum
+ // 628180B8-308D-4c5e-B7DB-1BEB62E62EF4
+ static const GUID VMBUS_SERVICE_ID = {.Data = {0xb8, 0x80, 0x81, 0x62, 0x8d, 0x30, 0x5e, 0x4c, 0xb7, 0xdb, 0x1b, 0xeb, 0x62, 0xe6, 0x2e, 0xf4} };
+ 
+-#define MAX_NUM_CPUS	4
++#define MAX_NUM_CPUS	 4
+ 
+ 
+ typedef struct {
+@@ -235,14 +222,14 @@ HvSignalEvent(
+ 	VOID
+ 	);
+ 
+-INTERNAL void
++INTERNAL void 
+ HvSynicInit(
+ 	void * irqArg
+ 	);
+ 
+ INTERNAL VOID
+ HvSynicCleanup(
+-	VOID
++	VOID *arg
+ 	);
+ 
+ /*
+Only in hyperv19/vmbus: hyperv19.tgz
