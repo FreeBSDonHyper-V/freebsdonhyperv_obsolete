@@ -20,6 +20,8 @@
  *
  * Copyright (c) 2010-2011, Citrix, Inc.
  *
+ * Ported from lis21 code drop
+ *
  * HyperV protocol used by the network VSP/VSC.  This protocol defines the
  * messages that are sent through the VMBus ring buffer established
  * during the channel offer from the VSP to the VSC.  The small size of this
@@ -28,27 +30,35 @@
  *
  *****************************************************************************/
 
-/*++
-
-Copyright (c) Microsoft Corporation
-
-Module Name:
-
-    NvspProtocol.h
-
-Abstract:
-
-    This file contains the protocol used by the network VSP/VSC. This protocol
-    defines the messages that are sent through the VMBus ring buffer established
-    during the channel offer from the VSP to the VSC. The small size of this
-    protocol is possible because most of the work for facilitating a network 
-    connection is handled by the RNDIS protocol.
-
-Author:
-
-    Author jeffreyk 27-June-2005
-
---*/
+/*
+ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+ *
+ *     Redistribution and use in source and binary forms, with or
+ *     without modification, are permitted provided that the following
+ *     conditions are met:
+ *
+ *      - Redistributions of source code must retain the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer.
+ *
+ *      - Redistributions in binary form must reproduce the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Authors:
+ *   Haiyang Zhang <haiyangz@microsoft.com>
+ *   Hank Janssen  <hjanssen@microsoft.com>
+ */
 
 #ifndef __HV_NVSP_PROTOCOL_H__
 #define __HV_NVSP_PROTOCOL_H__

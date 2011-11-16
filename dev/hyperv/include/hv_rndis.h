@@ -20,48 +20,45 @@
  *
  * Copyright (c) 2010-2011, Citrix, Inc.
  *
+ * Ported from lis21 code drop
+ *
  * HyperV remote NDIS message structures
  *
  *****************************************************************************/
 
-/***************************************************************************
-
-Copyright (c) 1999  Microsoft Corporation
-
-Module Name:
-
-    RNDIS.H
-
-Abstract:
-
-    This module defines the Remote NDIS message structures.
-
-Environment:
-
-    kernel mode only
-
-Notes:
-
-    THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
-    KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
-    IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR
-    PURPOSE.
-
-    Copyright (c) 1999 Microsoft Corporation.  All Rights Reserved.
-
-
-Revision History:
-
-    2/8/99 : created
-
-Authors:
-
-    
-****************************************************************************/
-
+/*
+ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+ *
+ *     Redistribution and use in source and binary forms, with or
+ *     without modification, are permitted provided that the following
+ *     conditions are met:
+ *
+ *      - Redistributions of source code must retain the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer.
+ *
+ *      - Redistributions in binary form must reproduce the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Authors:
+ *   Haiyang Zhang <haiyangz@microsoft.com>
+ *   Hank Janssen  <hjanssen@microsoft.com>
+ */
 
 #ifndef __HV_RNDIS_H__
 #define __HV_RNDIS_H__
+
 
 //
 //  Basic types
@@ -325,434 +322,6 @@ typedef UINT32                                  RNDIS_AF;
 #define RNDIS_OID_802_3_XMIT_HEARTBEAT_FAILURE          0x01020205
 #define RNDIS_OID_802_3_XMIT_TIMES_CRS_LOST             0x01020206
 #define RNDIS_OID_802_3_XMIT_LATE_COLLISIONS            0x01020207
-
-
-//
-// 802.5 Objects (Token-Ring)
-//
-
-#define RNDIS_OID_802_5_PERMANENT_ADDRESS               0x02010101
-#define RNDIS_OID_802_5_CURRENT_ADDRESS                 0x02010102
-#define RNDIS_OID_802_5_CURRENT_FUNCTIONAL              0x02010103
-#define RNDIS_OID_802_5_CURRENT_GROUP                   0x02010104
-#define RNDIS_OID_802_5_LAST_OPEN_STATUS                0x02010105
-#define RNDIS_OID_802_5_CURRENT_RING_STATUS             0x02010106
-#define RNDIS_OID_802_5_CURRENT_RING_STATE              0x02010107
-
-#define RNDIS_OID_802_5_LINE_ERRORS                     0x02020101
-#define RNDIS_OID_802_5_LOST_FRAMES                     0x02020102
-
-#define RNDIS_OID_802_5_BURST_ERRORS                    0x02020201
-#define RNDIS_OID_802_5_AC_ERRORS                       0x02020202
-#define RNDIS_OID_802_5_ABORT_DELIMETERS                0x02020203
-#define RNDIS_OID_802_5_FRAME_COPIED_ERRORS             0x02020204
-#define RNDIS_OID_802_5_FREQUENCY_ERRORS                0x02020205
-#define RNDIS_OID_802_5_TOKEN_ERRORS                    0x02020206
-#define RNDIS_OID_802_5_INTERNAL_ERRORS                 0x02020207
-
-
-//
-// FDDI Objects
-//
-
-#define RNDIS_OID_FDDI_LONG_PERMANENT_ADDR              0x03010101
-#define RNDIS_OID_FDDI_LONG_CURRENT_ADDR                0x03010102
-#define RNDIS_OID_FDDI_LONG_MULTICAST_LIST              0x03010103
-#define RNDIS_OID_FDDI_LONG_MAX_LIST_SIZE               0x03010104
-#define RNDIS_OID_FDDI_SHORT_PERMANENT_ADDR             0x03010105
-#define RNDIS_OID_FDDI_SHORT_CURRENT_ADDR               0x03010106
-#define RNDIS_OID_FDDI_SHORT_MULTICAST_LIST             0x03010107
-#define RNDIS_OID_FDDI_SHORT_MAX_LIST_SIZE              0x03010108
-
-#define RNDIS_OID_FDDI_ATTACHMENT_TYPE                  0x03020101
-#define RNDIS_OID_FDDI_UPSTREAM_NODE_LONG               0x03020102
-#define RNDIS_OID_FDDI_DOWNSTREAM_NODE_LONG             0x03020103
-#define RNDIS_OID_FDDI_FRAME_ERRORS                     0x03020104
-#define RNDIS_OID_FDDI_FRAMES_LOST                      0x03020105
-#define RNDIS_OID_FDDI_RING_MGT_STATE                   0x03020106
-#define RNDIS_OID_FDDI_LCT_FAILURES                     0x03020107
-#define RNDIS_OID_FDDI_LEM_REJECTS                      0x03020108
-#define RNDIS_OID_FDDI_LCONNECTION_STATE                0x03020109
-
-#define RNDIS_OID_FDDI_SMT_STATION_ID                   0x03030201
-#define RNDIS_OID_FDDI_SMT_OP_VERSION_ID                0x03030202
-#define RNDIS_OID_FDDI_SMT_HI_VERSION_ID                0x03030203
-#define RNDIS_OID_FDDI_SMT_LO_VERSION_ID                0x03030204
-#define RNDIS_OID_FDDI_SMT_MANUFACTURER_DATA            0x03030205
-#define RNDIS_OID_FDDI_SMT_USER_DATA                    0x03030206
-#define RNDIS_OID_FDDI_SMT_MIB_VERSION_ID               0x03030207
-#define RNDIS_OID_FDDI_SMT_MAC_CT                       0x03030208
-#define RNDIS_OID_FDDI_SMT_NON_MASTER_CT                0x03030209
-#define RNDIS_OID_FDDI_SMT_MASTER_CT                    0x0303020A
-#define RNDIS_OID_FDDI_SMT_AVAILABLE_PATHS              0x0303020B
-#define RNDIS_OID_FDDI_SMT_CONFIG_CAPABILITIES          0x0303020C
-#define RNDIS_OID_FDDI_SMT_CONFIG_POLICY                0x0303020D
-#define RNDIS_OID_FDDI_SMT_CONNECTION_POLICY            0x0303020E
-#define RNDIS_OID_FDDI_SMT_T_NOTIFY                     0x0303020F
-#define RNDIS_OID_FDDI_SMT_STAT_RPT_POLICY              0x03030210
-#define RNDIS_OID_FDDI_SMT_TRACE_MAX_EXPIRATION         0x03030211
-#define RNDIS_OID_FDDI_SMT_PORT_INDEXES                 0x03030212
-#define RNDIS_OID_FDDI_SMT_MAC_INDEXES                  0x03030213
-#define RNDIS_OID_FDDI_SMT_BYPASS_PRESENT               0x03030214
-#define RNDIS_OID_FDDI_SMT_ECM_STATE                    0x03030215
-#define RNDIS_OID_FDDI_SMT_CF_STATE                     0x03030216
-#define RNDIS_OID_FDDI_SMT_HOLD_STATE                   0x03030217
-#define RNDIS_OID_FDDI_SMT_REMOTE_DISCONNECT_FLAG       0x03030218
-#define RNDIS_OID_FDDI_SMT_STATION_STATUS               0x03030219
-#define RNDIS_OID_FDDI_SMT_PEER_WRAP_FLAG               0x0303021A
-#define RNDIS_OID_FDDI_SMT_MSG_TIME_STAMP               0x0303021B
-#define RNDIS_OID_FDDI_SMT_TRANSITION_TIME_STAMP        0x0303021C
-#define RNDIS_OID_FDDI_SMT_SET_COUNT                    0x0303021D
-#define RNDIS_OID_FDDI_SMT_LAST_SET_STATION_ID          0x0303021E
-#define RNDIS_OID_FDDI_MAC_FRAME_STATUS_FUNCTIONS       0x0303021F
-#define RNDIS_OID_FDDI_MAC_BRIDGE_FUNCTIONS             0x03030220
-#define RNDIS_OID_FDDI_MAC_T_MAX_CAPABILITY             0x03030221
-#define RNDIS_OID_FDDI_MAC_TVX_CAPABILITY               0x03030222
-#define RNDIS_OID_FDDI_MAC_AVAILABLE_PATHS              0x03030223
-#define RNDIS_OID_FDDI_MAC_CURRENT_PATH                 0x03030224
-#define RNDIS_OID_FDDI_MAC_UPSTREAM_NBR                 0x03030225
-#define RNDIS_OID_FDDI_MAC_DOWNSTREAM_NBR               0x03030226
-#define RNDIS_OID_FDDI_MAC_OLD_UPSTREAM_NBR             0x03030227
-#define RNDIS_OID_FDDI_MAC_OLD_DOWNSTREAM_NBR           0x03030228
-#define RNDIS_OID_FDDI_MAC_DUP_ADDRESS_TEST             0x03030229
-#define RNDIS_OID_FDDI_MAC_REQUESTED_PATHS              0x0303022A
-#define RNDIS_OID_FDDI_MAC_DOWNSTREAM_PORT_TYPE         0x0303022B
-#define RNDIS_OID_FDDI_MAC_INDEX                        0x0303022C
-#define RNDIS_OID_FDDI_MAC_SMT_ADDRESS                  0x0303022D
-#define RNDIS_OID_FDDI_MAC_LONG_GRP_ADDRESS             0x0303022E
-#define RNDIS_OID_FDDI_MAC_SHORT_GRP_ADDRESS            0x0303022F
-#define RNDIS_OID_FDDI_MAC_T_REQ                        0x03030230
-#define RNDIS_OID_FDDI_MAC_T_NEG                        0x03030231
-#define RNDIS_OID_FDDI_MAC_T_MAX                        0x03030232
-#define RNDIS_OID_FDDI_MAC_TVX_VALUE                    0x03030233
-#define RNDIS_OID_FDDI_MAC_T_PRI0                       0x03030234
-#define RNDIS_OID_FDDI_MAC_T_PRI1                       0x03030235
-#define RNDIS_OID_FDDI_MAC_T_PRI2                       0x03030236
-#define RNDIS_OID_FDDI_MAC_T_PRI3                       0x03030237
-#define RNDIS_OID_FDDI_MAC_T_PRI4                       0x03030238
-#define RNDIS_OID_FDDI_MAC_T_PRI5                       0x03030239
-#define RNDIS_OID_FDDI_MAC_T_PRI6                       0x0303023A
-#define RNDIS_OID_FDDI_MAC_FRAME_CT                     0x0303023B
-#define RNDIS_OID_FDDI_MAC_COPIED_CT                    0x0303023C
-#define RNDIS_OID_FDDI_MAC_TRANSMIT_CT                  0x0303023D
-#define RNDIS_OID_FDDI_MAC_TOKEN_CT                     0x0303023E
-#define RNDIS_OID_FDDI_MAC_ERROR_CT                     0x0303023F
-#define RNDIS_OID_FDDI_MAC_LOST_CT                      0x03030240
-#define RNDIS_OID_FDDI_MAC_TVX_EXPIRED_CT               0x03030241
-#define RNDIS_OID_FDDI_MAC_NOT_COPIED_CT                0x03030242
-#define RNDIS_OID_FDDI_MAC_LATE_CT                      0x03030243
-#define RNDIS_OID_FDDI_MAC_RING_OP_CT                   0x03030244
-#define RNDIS_OID_FDDI_MAC_FRAME_ERROR_THRESHOLD        0x03030245
-#define RNDIS_OID_FDDI_MAC_FRAME_ERROR_RATIO            0x03030246
-#define RNDIS_OID_FDDI_MAC_NOT_COPIED_THRESHOLD         0x03030247
-#define RNDIS_OID_FDDI_MAC_NOT_COPIED_RATIO             0x03030248
-#define RNDIS_OID_FDDI_MAC_RMT_STATE                    0x03030249
-#define RNDIS_OID_FDDI_MAC_DA_FLAG                      0x0303024A
-#define RNDIS_OID_FDDI_MAC_UNDA_FLAG                    0x0303024B
-#define RNDIS_OID_FDDI_MAC_FRAME_ERROR_FLAG             0x0303024C
-#define RNDIS_OID_FDDI_MAC_NOT_COPIED_FLAG              0x0303024D
-#define RNDIS_OID_FDDI_MAC_MA_UNITDATA_AVAILABLE        0x0303024E
-#define RNDIS_OID_FDDI_MAC_HARDWARE_PRESENT             0x0303024F
-#define RNDIS_OID_FDDI_MAC_MA_UNITDATA_ENABLE           0x03030250
-#define RNDIS_OID_FDDI_PATH_INDEX                       0x03030251
-#define RNDIS_OID_FDDI_PATH_RING_LATENCY                0x03030252
-#define RNDIS_OID_FDDI_PATH_TRACE_STATUS                0x03030253
-#define RNDIS_OID_FDDI_PATH_SBA_PAYLOAD                 0x03030254
-#define RNDIS_OID_FDDI_PATH_SBA_OVERHEAD                0x03030255
-#define RNDIS_OID_FDDI_PATH_CONFIGURATION               0x03030256
-#define RNDIS_OID_FDDI_PATH_T_R_MODE                    0x03030257
-#define RNDIS_OID_FDDI_PATH_SBA_AVAILABLE               0x03030258
-#define RNDIS_OID_FDDI_PATH_TVX_LOWER_BOUND             0x03030259
-#define RNDIS_OID_FDDI_PATH_T_MAX_LOWER_BOUND           0x0303025A
-#define RNDIS_OID_FDDI_PATH_MAX_T_REQ                   0x0303025B
-#define RNDIS_OID_FDDI_PORT_MY_TYPE                     0x0303025C
-#define RNDIS_OID_FDDI_PORT_NEIGHBOR_TYPE               0x0303025D
-#define RNDIS_OID_FDDI_PORT_CONNECTION_POLICIES         0x0303025E
-#define RNDIS_OID_FDDI_PORT_MAC_INDICATED               0x0303025F
-#define RNDIS_OID_FDDI_PORT_CURRENT_PATH                0x03030260
-#define RNDIS_OID_FDDI_PORT_REQUESTED_PATHS             0x03030261
-#define RNDIS_OID_FDDI_PORT_MAC_PLACEMENT               0x03030262
-#define RNDIS_OID_FDDI_PORT_AVAILABLE_PATHS             0x03030263
-#define RNDIS_OID_FDDI_PORT_MAC_LOOP_TIME               0x03030264
-#define RNDIS_OID_FDDI_PORT_PMD_CLASS                   0x03030265
-#define RNDIS_OID_FDDI_PORT_CONNECTION_CAPABILITIES     0x03030266
-#define RNDIS_OID_FDDI_PORT_INDEX                       0x03030267
-#define RNDIS_OID_FDDI_PORT_MAINT_LS                    0x03030268
-#define RNDIS_OID_FDDI_PORT_BS_FLAG                     0x03030269
-#define RNDIS_OID_FDDI_PORT_PC_LS                       0x0303026A
-#define RNDIS_OID_FDDI_PORT_EB_ERROR_CT                 0x0303026B
-#define RNDIS_OID_FDDI_PORT_LCT_FAIL_CT                 0x0303026C
-#define RNDIS_OID_FDDI_PORT_LER_ESTIMATE                0x0303026D
-#define RNDIS_OID_FDDI_PORT_LEM_REJECT_CT               0x0303026E
-#define RNDIS_OID_FDDI_PORT_LEM_CT                      0x0303026F
-#define RNDIS_OID_FDDI_PORT_LER_CUTOFF                  0x03030270
-#define RNDIS_OID_FDDI_PORT_LER_ALARM                   0x03030271
-#define RNDIS_OID_FDDI_PORT_CONNNECT_STATE              0x03030272
-#define RNDIS_OID_FDDI_PORT_PCM_STATE                   0x03030273
-#define RNDIS_OID_FDDI_PORT_PC_WITHHOLD                 0x03030274
-#define RNDIS_OID_FDDI_PORT_LER_FLAG                    0x03030275
-#define RNDIS_OID_FDDI_PORT_HARDWARE_PRESENT            0x03030276
-#define RNDIS_OID_FDDI_SMT_STATION_ACTION               0x03030277
-#define RNDIS_OID_FDDI_PORT_ACTION                      0x03030278
-#define RNDIS_OID_FDDI_IF_DESCR                         0x03030279
-#define RNDIS_OID_FDDI_IF_TYPE                          0x0303027A
-#define RNDIS_OID_FDDI_IF_MTU                           0x0303027B
-#define RNDIS_OID_FDDI_IF_SPEED                         0x0303027C
-#define RNDIS_OID_FDDI_IF_PHYS_ADDRESS                  0x0303027D
-#define RNDIS_OID_FDDI_IF_ADMIN_STATUS                  0x0303027E
-#define RNDIS_OID_FDDI_IF_OPER_STATUS                   0x0303027F
-#define RNDIS_OID_FDDI_IF_LAST_CHANGE                   0x03030280
-#define RNDIS_OID_FDDI_IF_IN_OCTETS                     0x03030281
-#define RNDIS_OID_FDDI_IF_IN_UCAST_PKTS                 0x03030282
-#define RNDIS_OID_FDDI_IF_IN_NUCAST_PKTS                0x03030283
-#define RNDIS_OID_FDDI_IF_IN_DISCARDS                   0x03030284
-#define RNDIS_OID_FDDI_IF_IN_ERRORS                     0x03030285
-#define RNDIS_OID_FDDI_IF_IN_UNKNOWN_PROTOS             0x03030286
-#define RNDIS_OID_FDDI_IF_OUT_OCTETS                    0x03030287
-#define RNDIS_OID_FDDI_IF_OUT_UCAST_PKTS                0x03030288
-#define RNDIS_OID_FDDI_IF_OUT_NUCAST_PKTS               0x03030289
-#define RNDIS_OID_FDDI_IF_OUT_DISCARDS                  0x0303028A
-#define RNDIS_OID_FDDI_IF_OUT_ERRORS                    0x0303028B
-#define RNDIS_OID_FDDI_IF_OUT_QLEN                      0x0303028C
-#define RNDIS_OID_FDDI_IF_SPECIFIC                      0x0303028D
-
-
-//
-// WAN objects
-//
-
-#define RNDIS_OID_WAN_PERMANENT_ADDRESS                 0x04010101
-#define RNDIS_OID_WAN_CURRENT_ADDRESS                   0x04010102
-#define RNDIS_OID_WAN_QUALITY_OF_SERVICE                0x04010103
-#define RNDIS_OID_WAN_PROTOCOL_TYPE                     0x04010104
-#define RNDIS_OID_WAN_MEDIUM_SUBTYPE                    0x04010105
-#define RNDIS_OID_WAN_HEADER_FORMAT                     0x04010106
-
-#define RNDIS_OID_WAN_GET_INFO                          0x04010107
-#define RNDIS_OID_WAN_SET_LINK_INFO                     0x04010108
-#define RNDIS_OID_WAN_GET_LINK_INFO                     0x04010109
-
-#define RNDIS_OID_WAN_LINE_COUNT                        0x0401010A
-
-#define RNDIS_OID_WAN_GET_BRIDGE_INFO                   0x0401020A
-#define RNDIS_OID_WAN_SET_BRIDGE_INFO                   0x0401020B
-#define RNDIS_OID_WAN_GET_COMP_INFO                     0x0401020C
-#define RNDIS_OID_WAN_SET_COMP_INFO                     0x0401020D
-#define RNDIS_OID_WAN_GET_STATS_INFO                    0x0401020E
-
-
-//
-// LocalTalk objects
-//
-
-#define RNDIS_OID_LTALK_CURRENT_NODE_ID                 0x05010102
-
-#define RNDIS_OID_LTALK_IN_BROADCASTS                   0x05020101
-#define RNDIS_OID_LTALK_IN_LENGTH_ERRORS                0x05020102
-
-#define RNDIS_OID_LTALK_OUT_NO_HANDLERS                 0x05020201
-#define RNDIS_OID_LTALK_COLLISIONS                      0x05020202
-#define RNDIS_OID_LTALK_DEFERS                          0x05020203
-#define RNDIS_OID_LTALK_NO_DATA_ERRORS                  0x05020204
-#define RNDIS_OID_LTALK_RANDOM_CTS_ERRORS               0x05020205
-#define RNDIS_OID_LTALK_FCS_ERRORS                      0x05020206
-
-
-//
-// Arcnet objects
-//
-
-#define RNDIS_OID_ARCNET_PERMANENT_ADDRESS              0x06010101
-#define RNDIS_OID_ARCNET_CURRENT_ADDRESS                0x06010102
-
-#define RNDIS_OID_ARCNET_RECONFIGURATIONS               0x06020201
-
-
-//
-// TAPI objects
-//
-#define RNDIS_OID_TAPI_ACCEPT                           0x07030101
-#define RNDIS_OID_TAPI_ANSWER                           0x07030102
-#define RNDIS_OID_TAPI_CLOSE                            0x07030103
-#define RNDIS_OID_TAPI_CLOSE_CALL                       0x07030104
-#define RNDIS_OID_TAPI_CONDITIONAL_MEDIA_DETECTION      0x07030105
-#define RNDIS_OID_TAPI_CONFIG_DIALOG                    0x07030106
-#define RNDIS_OID_TAPI_DEV_SPECIFIC                     0x07030107
-#define RNDIS_OID_TAPI_DIAL                             0x07030108
-#define RNDIS_OID_TAPI_DROP                             0x07030109
-#define RNDIS_OID_TAPI_GET_ADDRESS_CAPS                 0x0703010A
-#define RNDIS_OID_TAPI_GET_ADDRESS_ID                   0x0703010B
-#define RNDIS_OID_TAPI_GET_ADDRESS_STATUS               0x0703010C
-#define RNDIS_OID_TAPI_GET_CALL_ADDRESS_ID              0x0703010D
-#define RNDIS_OID_TAPI_GET_CALL_INFO                    0x0703010E
-#define RNDIS_OID_TAPI_GET_CALL_STATUS                  0x0703010F
-#define RNDIS_OID_TAPI_GET_DEV_CAPS                     0x07030110
-#define RNDIS_OID_TAPI_GET_DEV_CONFIG                   0x07030111
-#define RNDIS_OID_TAPI_GET_EXTENSION_ID                 0x07030112
-#define RNDIS_OID_TAPI_GET_ID                           0x07030113
-#define RNDIS_OID_TAPI_GET_LINE_DEV_STATUS              0x07030114
-#define RNDIS_OID_TAPI_MAKE_CALL                        0x07030115
-#define RNDIS_OID_TAPI_NEGOTIATE_EXT_VERSION            0x07030116
-#define RNDIS_OID_TAPI_OPEN                             0x07030117
-#define RNDIS_OID_TAPI_PROVIDER_INITIALIZE              0x07030118
-#define RNDIS_OID_TAPI_PROVIDER_SHUTDOWN                0x07030119
-#define RNDIS_OID_TAPI_SECURE_CALL                      0x0703011A
-#define RNDIS_OID_TAPI_SELECT_EXT_VERSION               0x0703011B
-#define RNDIS_OID_TAPI_SEND_USER_USER_INFO              0x0703011C
-#define RNDIS_OID_TAPI_SET_APP_SPECIFIC                 0x0703011D
-#define RNDIS_OID_TAPI_SET_CALL_PARAMS                  0x0703011E
-#define RNDIS_OID_TAPI_SET_DEFAULT_MEDIA_DETECTION      0x0703011F
-#define RNDIS_OID_TAPI_SET_DEV_CONFIG                   0x07030120
-#define RNDIS_OID_TAPI_SET_MEDIA_MODE                   0x07030121
-#define RNDIS_OID_TAPI_SET_STATUS_MESSAGES              0x07030122
-
-
-//
-// ATM Connection Oriented Ndis
-//
-#define RNDIS_OID_ATM_SUPPORTED_VC_RATES                0x08010101
-#define RNDIS_OID_ATM_SUPPORTED_SERVICE_CATEGORY        0x08010102
-#define RNDIS_OID_ATM_SUPPORTED_AAL_TYPES               0x08010103
-#define RNDIS_OID_ATM_HW_CURRENT_ADDRESS                0x08010104
-#define RNDIS_OID_ATM_MAX_ACTIVE_VCS                    0x08010105
-#define RNDIS_OID_ATM_MAX_ACTIVE_VCI_BITS               0x08010106
-#define RNDIS_OID_ATM_MAX_ACTIVE_VPI_BITS               0x08010107
-#define RNDIS_OID_ATM_ALIGNMENT_REQUIRED                0x08010108
-#define RNDIS_OID_ATM_MAX_AAL0_PACKET_SIZE              0x08010109
-#define RNDIS_OID_ATM_MAX_AAL1_PACKET_SIZE              0x0801010A
-#define RNDIS_OID_ATM_MAX_AAL34_PACKET_SIZE             0x0801010B
-#define RNDIS_OID_ATM_MAX_AAL5_PACKET_SIZE              0x0801010C
-
-#define RNDIS_OID_ATM_SIGNALING_VPIVCI                  0x08010201
-#define RNDIS_OID_ATM_ASSIGNED_VPI                      0x08010202
-#define RNDIS_OID_ATM_ACQUIRE_ACCESS_NET_RESOURCES      0x08010203
-#define RNDIS_OID_ATM_RELEASE_ACCESS_NET_RESOURCES      0x08010204
-#define RNDIS_OID_ATM_ILMI_VPIVCI                       0x08010205
-#define RNDIS_OID_ATM_DIGITAL_BROADCAST_VPIVCI          0x08010206
-#define RNDIS_OID_ATM_GET_NEAREST_FLOW                  0x08010207
-
-//
-// ATM specific statistics OIDs.
-//
-#define RNDIS_OID_ATM_RCV_CELLS_OK                      0x08020101
-#define RNDIS_OID_ATM_XMIT_CELLS_OK                     0x08020102
-#define RNDIS_OID_ATM_RCV_CELLS_DROPPED                 0x08020103
-
-#define RNDIS_OID_ATM_RCV_INVALID_VPI_VCI               0x08020201
-#define RNDIS_OID_ATM_CELLS_HEC_ERROR                   0x08020202
-#define RNDIS_OID_ATM_RCV_REASSEMBLY_ERROR              0x08020203
-
-//
-// PCCA (Wireless) object
-//
-
-//
-// All WirelessWAN devices must support the following OIDs
-//
-
-#define RNDIS_OID_WW_GEN_NETWORK_TYPES_SUPPORTED        0x09010101
-#define RNDIS_OID_WW_GEN_NETWORK_TYPE_IN_USE            0x09010102
-#define RNDIS_OID_WW_GEN_HEADER_FORMATS_SUPPORTED       0x09010103
-#define RNDIS_OID_WW_GEN_HEADER_FORMAT_IN_USE           0x09010104
-#define RNDIS_OID_WW_GEN_INDICATION_REQUEST             0x09010105
-#define RNDIS_OID_WW_GEN_DEVICE_INFO                    0x09010106
-#define RNDIS_OID_WW_GEN_OPERATION_MODE                 0x09010107
-#define RNDIS_OID_WW_GEN_LOCK_STATUS                    0x09010108
-#define RNDIS_OID_WW_GEN_DISABLE_TRANSMITTER            0x09010109
-#define RNDIS_OID_WW_GEN_NETWORK_ID                     0x0901010A
-#define RNDIS_OID_WW_GEN_PERMANENT_ADDRESS              0x0901010B
-#define RNDIS_OID_WW_GEN_CURRENT_ADDRESS                0x0901010C
-#define RNDIS_OID_WW_GEN_SUSPEND_DRIVER                 0x0901010D
-#define RNDIS_OID_WW_GEN_BASESTATION_ID                 0x0901010E
-#define RNDIS_OID_WW_GEN_CHANNEL_ID                     0x0901010F
-#define RNDIS_OID_WW_GEN_ENCRYPTION_SUPPORTED           0x09010110
-#define RNDIS_OID_WW_GEN_ENCRYPTION_IN_USE              0x09010111
-#define RNDIS_OID_WW_GEN_ENCRYPTION_STATE               0x09010112
-#define RNDIS_OID_WW_GEN_CHANNEL_QUALITY                0x09010113
-#define RNDIS_OID_WW_GEN_REGISTRATION_STATUS            0x09010114
-#define RNDIS_OID_WW_GEN_RADIO_LINK_SPEED               0x09010115
-#define RNDIS_OID_WW_GEN_LATENCY                        0x09010116
-#define RNDIS_OID_WW_GEN_BATTERY_LEVEL                  0x09010117
-#define RNDIS_OID_WW_GEN_EXTERNAL_POWER                 0x09010118
-
-//
-// Network Dependent OIDs - Mobitex:
-//
-
-#define RNDIS_OID_WW_MBX_SUBADDR                        0x09050101
-// OID 0x09050102 is reserved and may not be used
-#define RNDIS_OID_WW_MBX_FLEXLIST                       0x09050103
-#define RNDIS_OID_WW_MBX_GROUPLIST                      0x09050104
-#define RNDIS_OID_WW_MBX_TRAFFIC_AREA                   0x09050105
-#define RNDIS_OID_WW_MBX_LIVE_DIE                       0x09050106
-#define RNDIS_OID_WW_MBX_TEMP_DEFAULTLIST               0x09050107
-
-//
-// Network Dependent OIDs - Pinpoint:
-//
-
-#define RNDIS_OID_WW_PIN_LOC_AUTHORIZE                  0x09090101
-#define RNDIS_OID_WW_PIN_LAST_LOCATION                  0x09090102
-#define RNDIS_OID_WW_PIN_LOC_FIX                        0x09090103
-
-//
-// Network Dependent - CDPD:
-//
-
-#define RNDIS_OID_WW_CDPD_SPNI                          0x090D0101
-#define RNDIS_OID_WW_CDPD_WASI                          0x090D0102
-#define RNDIS_OID_WW_CDPD_AREA_COLOR                    0x090D0103
-#define RNDIS_OID_WW_CDPD_TX_POWER_LEVEL                0x090D0104
-#define RNDIS_OID_WW_CDPD_EID                           0x090D0105
-#define RNDIS_OID_WW_CDPD_HEADER_COMPRESSION            0x090D0106
-#define RNDIS_OID_WW_CDPD_DATA_COMPRESSION              0x090D0107
-#define RNDIS_OID_WW_CDPD_CHANNEL_SELECT                0x090D0108
-#define RNDIS_OID_WW_CDPD_CHANNEL_STATE                 0x090D0109
-#define RNDIS_OID_WW_CDPD_NEI                           0x090D010A
-#define RNDIS_OID_WW_CDPD_NEI_STATE                     0x090D010B
-#define RNDIS_OID_WW_CDPD_SERVICE_PROVIDER_IDENTIFIER   0x090D010C
-#define RNDIS_OID_WW_CDPD_SLEEP_MODE                    0x090D010D
-#define RNDIS_OID_WW_CDPD_CIRCUIT_SWITCHED              0x090D010E
-#define RNDIS_OID_WW_CDPD_TEI                           0x090D010F
-#define RNDIS_OID_WW_CDPD_RSSI                          0x090D0110
-
-//
-// Network Dependent - Ardis:
-//
-
-#define RNDIS_OID_WW_ARD_SNDCP                          0x09110101
-#define RNDIS_OID_WW_ARD_TMLY_MSG                       0x09110102
-#define RNDIS_OID_WW_ARD_DATAGRAM                       0x09110103
-
-//
-// Network Dependent - DataTac:
-//
-
-#define RNDIS_OID_WW_TAC_COMPRESSION                    0x09150101
-#define RNDIS_OID_WW_TAC_SET_CONFIG                     0x09150102
-#define RNDIS_OID_WW_TAC_GET_STATUS                     0x09150103
-#define RNDIS_OID_WW_TAC_USER_HEADER                    0x09150104
-
-//
-// Network Dependent - Metricom:
-//
-
-#define RNDIS_OID_WW_MET_FUNCTION                       0x09190101
-
-//
-// IRDA objects
-//
-#define RNDIS_OID_IRDA_RECEIVING                        0x0A010100
-#define RNDIS_OID_IRDA_TURNAROUND_TIME                  0x0A010101
-#define RNDIS_OID_IRDA_SUPPORTED_SPEEDS                 0x0A010102
-#define RNDIS_OID_IRDA_LINK_SPEED                       0x0A010103
-#define RNDIS_OID_IRDA_MEDIA_BUSY                       0x0A010104
-
-#define RNDIS_OID_IRDA_EXTRA_RCV_BOFS                   0x0A010200
-#define RNDIS_OID_IRDA_RATE_SNIFF                       0x0A010201
-#define RNDIS_OID_IRDA_UNICAST_LIST                     0x0A010202
-#define RNDIS_OID_IRDA_MAX_UNICAST_LIST_SIZE            0x0A010203
-
 
 
 //

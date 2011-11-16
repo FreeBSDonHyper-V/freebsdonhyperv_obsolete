@@ -20,22 +20,44 @@
  *
  * Copyright (c) 2010-2011, Citrix, Inc.
  *
+ * Ported from lis21 code drop
+ *
  * HyperV structures that define the format of the vmbus packets.
  *
  *****************************************************************************/
 
-/*----------------------------------------------------------------------------
-  $Microsoft Confidential$
-  $Copyright (C) 2004 Microsoft Corporation.  All Rights Reserved.$
-  
-  $File: VmbusPacketInterface.w $
-  
-  Abstract:
-  
-    This file contains the structures that defines the format of the vmbus
-    packets.
+/*
+ * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
+ *
+ *     Redistribution and use in source and binary forms, with or
+ *     without modification, are permitted provided that the following
+ *     conditions are met:
+ *
+ *      - Redistributions of source code must retain the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer.
+ *
+ *      - Redistributions in binary form must reproduce the above
+ *        copyright notice, this list of conditions and the following
+ *        disclaimer in the documentation and/or other materials
+ *        provided with the distribution.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+ * BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ * ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ * Authors:
+ *   Haiyang Zhang <haiyangz@microsoft.com>
+ *   Hank Janssen  <hjanssen@microsoft.com>
+ */
 
-----------------------------------------------------------------------------*/
+#ifndef __HV_VMBUS_PACKET_FORMAT_H__
+#define __HV_VMBUS_PACKET_FORMAT_H__
 
 #pragma once
 
@@ -187,17 +209,7 @@ typedef struct _GPA_RANGE {
 
 } GPA_RANGE, *PGPA_RANGE;
 
-#ifdef _MSFT_
-FORCEINLINE
-__range(FIELD_OFFSET(GPA_RANGE, PfnArray), 0xffffffff)
-size_t
-GpaRangeSizeof(
-    __in_range(0, 0xffff)   size_t     PfnCount
-    )
-{
-    return FIELD_OFFSET(GPA_RANGE, PfnArray) + sizeof(UINT64) * PfnCount;
-}
-#endif
+
 
 #pragma pack(push, 1)
 
@@ -227,16 +239,7 @@ typedef struct _VMESTABLISH_GPADL {
 
 } VMESTABLISH_GPADL, *PVMESTABLISH_GPADL;
 
-#ifdef _MSFT_
-FORCEINLINE
-size_t
-VmestablishGpadlSizeof(
-    VOID
-    )
-{
-    return FIELD_OFFSET(VMESTABLISH_GPADL, Range);
-}
-#endif
+
 //
 // This is the format for a Teardown Gpadl packet, which indicates that the
 // GPADL handle in the Establish Gpadl packet will never be referenced again.
@@ -282,16 +285,7 @@ typedef struct _VMDATA_GPA_DIRECT {
     
 } VMDATA_GPA_DIRECT, *PVMDATA_GPA_DIRECT;
 
-#ifdef _MSFT_
-FORCEINLINE
-size_t
-VmdataGpaDirectSizeof(
-    VOID
-    )
-{
-    return FIELD_OFFSET(VMDATA_GPA_DIRECT, Range);
-}
-#endif
+
 
 //
 // This is the format for a Additional Data Packet.
@@ -361,4 +355,6 @@ typedef enum {
 } VMBUS_PACKET_TYPE, *PVMBUS_PACKET_TYPE;
 
 #define VMBUS_DATA_PACKET_FLAG_COMPLETION_REQUESTED    1
+
+#endif  /* __HV_VMBUS_PACKET_FORMAT_H__ */
 

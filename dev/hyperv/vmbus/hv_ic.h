@@ -20,18 +20,14 @@
  *
  * Copyright (c) 2010-2011, Citrix, Inc.
  *
+ * Ported from lis21 code drop
+ *
  * HyperV common header for Hyper-V ICs
  *
  *****************************************************************************/
 
 /*
  * Copyright (c) 2009, Microsoft Corporation - All rights reserved.
- *
- * This software is available to you under a choice of one of two
- * licenses.  You may choose to be licensed under the terms of the GNU
- * General Public License (GPL) Version 2, available from the file
- * LICENSE-GPL in the main directory of this source tree, or the
- * BSD license (http://opensource.org/licenses/bsd-license.php).
  *
  *     Redistribution and use in source and binary forms, with or
  *     without modification, are permitted provided that the following
@@ -59,8 +55,10 @@
  *   Haiyang Zhang <haiyangz@microsoft.com>
  *   Hank Janssen  <hjanssen@microsoft.com>
  */
-#ifndef _IC_H_
-#define _IC_H_
+
+#ifndef __HV_IC_H__
+#define __HV_IC_H__
+
 
 /**
  * Common header for Hyper-V ICs
@@ -125,5 +123,5 @@ struct heartbeat_msg_data
 } __attribute__((packed));
 
 
-#endif  /* _IC_H_ */
+#endif  /* __HV_IC_H__ */
 
